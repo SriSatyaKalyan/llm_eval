@@ -2,6 +2,7 @@ import asyncio
 import os
 
 import pytest
+import requests
 from dotenv import load_dotenv
 
 from langchain_anthropic import ChatAnthropic
@@ -22,17 +23,25 @@ async def test_context_precision():
     llm_model = ChatAnthropic(temperature=0, model_name=model_name)
     langchain_llm = LangchainLLMWrapper(llm_model)
     context_precision = LLMContextPrecisionWithoutReference(llm = langchain_llm)
+    question = "How many articles are there in the Selenium Webdriver course?"
+
+    response_dict = requests.post("https://rahulshettyacademy.com/rag-llm/ask",
+                  json={
+                    "question": question,
+                    "chat_history": []
+                    }
+                  ).json()
+    print(f"The response is: {response_dict}")
 
     # feed data
     sample = SingleTurnSample(
-        user_input = "How many articles are present in the Selenium WebDriver course?",
-        response = "There are **63 articles** included in the Selenium Webdriver course.",
-        retrieved_contexts= [
-            "Wish you all the Best! See you all in the course with above topics :)\n\nWho this course is for:\nAutomation Engineers\nSoftware Engineers\nManual testers\nSoftware developers",
-            "What you'll learn\n*****By the end of this course,You will be Mastered on Selenium Webdriver with strong Core JAVA basics\n****You will gain the ability to design PAGEOBJECT, DATADRIVEN&HYBRID Automation FRAMEWORKS from scratch\n*** InDepth understanding of real time Selenium CHALLENGES with 100 + examples\n*Complete knowledge on TestNG, MAVEN,ANT, JENKINS,LOG4J, CUCUMBER, HTML REPORTS,EXCEL API, GRID PARALLEL TESTING",
-            "This course includes:\n55 hours on-demand video\n2 coding exercises\nAssignments\n63 articles\n138 downloadable resources\nAccess on mobile and TV\nCertificate of completion",
-            "Course includes real time projects with practical Solutions for the Robust Selenium Framework building\nTheoretical Material,Code dump and Interview Guide are available for download\nNew : JOB ASSISTANCE after completion of course to make your Profile reach to Hundreds of Recruiters in my network.******\nJoin in our Selenium Training community with (350 + lectures, 5 Million Students) Learning Together which you will not see in any other Selenium online course on Udemy."
-        ]
+        user_input = question,
+        response = response_dict["answer"],
+        retrieved_contexts= [response_dict["retrieved_docs"][0]["page_content"],
+                             response_dict["retrieved_docs"][1]["page_content"],
+                             response_dict["retrieved_docs"][2]["page_content"],
+                             response_dict["retrieved_docs"][3]["page_content"]
+                             ],
     )
 
     print("Computing context precision score...", flush=True)
@@ -47,3 +56,14 @@ async def test_context_precision():
     print(f"The score is: {score}")
     assert score is not None
     assert 0 <= score <= 1
+
+    # sample = SingleTurnSample(
+    #     user_input="How many articles are present in the Selenium WebDriver course?",
+    #     response="There are **63 articles** included in the Selenium Webdriver course.",
+    #     retrieved_contexts=[
+    #         "Wish you all the Best! See you all in the course with above topics :)\n\nWho this course is for:\nAutomation Engineers\nSoftware Engineers\nManual testers\nSoftware developers",
+    #         "What you'll learn\n*****By the end of this course,You will be Mastered on Selenium Webdriver with strong Core JAVA basics\n****You will gain the ability to design PAGEOBJECT, DATADRIVEN&HYBRID Automation FRAMEWORKS from scratch\n*** InDepth understanding of real time Selenium CHALLENGES with 100 + examples\n*Complete knowledge on TestNG, MAVEN,ANT, JENKINS,LOG4J, CUCUMBER, HTML REPORTS,EXCEL API, GRID PARALLEL TESTING",
+    #         "This course includes:\n55 hours on-demand video\n2 coding exercises\nAssignments\n63 articles\n138 downloadable resources\nAccess on mobile and TV\nCertificate of completion",
+    #         "Course includes real time projects with practical Solutions for the Robust Selenium Framework building\nTheoretical Material,Code dump and Interview Guide are available for download\nNew : JOB ASSISTANCE after completion of course to make your Profile reach to Hundreds of Recruiters in my network.******\nJoin in our Selenium Training community with (350 + lectures, 5 Million Students) Learning Together which you will not see in any other Selenium online course on Udemy."
+    #     ]
+    # )

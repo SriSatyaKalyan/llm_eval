@@ -1,1 +1,7 @@
-.env.claude.idea//.claude//.claude/worktrees/
+.env
+.claude
+.idea/
+/.claude/
+/.claude/worktrees/
+__pycache__/
+*.pyc
