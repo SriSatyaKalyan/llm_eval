@@ -2,7 +2,8 @@
 
 A Python-based testing framework for evaluating Large Language Model (LLM) responses and Retrieval-Augmented Generation (RAG) systems. Built on top of the [RAGAS](https://docs.ragas.io/) framework, this project provides a suite of metrics to assess the quality, relevance, and accuracy of LLM outputs.
 
-![Static Badge](https://img.shields.io/badge/build-passing-brightgreen)
+![CI](https://github.com/SriSatyaKalyan/llm_eval/actions/workflows/eval-pipeline.yml/badge.svg)
+![Coverage](./coverage.svg)
 
 ## 📊 Latest Test Report
 
