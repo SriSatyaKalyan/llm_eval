@@ -10,13 +10,13 @@ The latest evaluation report is committed at [`data/eval_report.html`](data/eval
 
 > **View it rendered in the browser** →
 > [htmlpreview.github.io — eval_report.html](https://htmlpreview.github.io/?https://github.com/SriSatyaKalyan/llm_eval/blob/main/data/eval_report.html)
->
-> Or open it locally after cloning:
-> ```bash
-> open data/eval_report.html        # macOS
-> start data/eval_report.html       # Windows
-> xdg-open data/eval_report.html    # Linux
-> ```
+
+Or open it locally after cloning:
+```bash
+open data/eval_report.html        # macOS
+start data/eval_report.html       # Windows
+xdg-open data/eval_report.html    # Linux
+```
 
 ## 📋 Table of Contents
 
