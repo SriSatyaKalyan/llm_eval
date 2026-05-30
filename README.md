@@ -4,9 +4,24 @@ A Python-based testing framework for evaluating Large Language Model (LLM) respo
 
 ![Static Badge](https://img.shields.io/badge/build-passing-brightgreen)
 
+## 📊 Latest Test Report
+
+The latest evaluation report is committed at [`data/eval_report.html`](data/eval_report.html).
+
+> **View it rendered in the browser** →
+> [htmlpreview.github.io — eval_report.html](https://htmlpreview.github.io/?https://github.com/SriSatyaKalyan/llm_eval/blob/main/data/eval_report.html)
+>
+> Or open it locally after cloning:
+> ```bash
+> open data/eval_report.html        # macOS
+> start data/eval_report.html       # Windows
+> xdg-open data/eval_report.html    # Linux
+> ```
+
 ## 📋 Table of Contents
 
 - [Overview](#overview)
+- [Latest Test Report](#-latest-test-report)
 - [Features](#features)
 - [Prerequisites](#prerequisites)
 - [Installation](#installation)
