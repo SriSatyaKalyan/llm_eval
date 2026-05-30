@@ -1,1 +1,10 @@
-[  {    "question": "How many articles are there in the Selenium Webdriver course?",    "reference": "63"  },  {    "question": "What are the requirements for the course?",    "reference": "The course requires basic programming knowledge"  }]
+[
+  {
+    "question": "How many articles are there in the Selenium Webdriver course?",
+    "reference": "63"
+  },
+  {
+    "question": "What will I learn in the Selenium Webdriver course?",
+    "reference": "You will master Selenium Webdriver with Java and be able to design automation frameworks from scratch"
+  }
+]
