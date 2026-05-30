@@ -34,6 +34,7 @@ jobs:
         run: |
           pip install --upgrade pip
           pip install -r requirements.txt
+          pip install pytest-cov coverage-badge
 
       - name: Patch ragas VertexAI import
         # ragas.llms.base unconditionally imports ChatVertexAI from
@@ -76,6 +77,23 @@ jobs:
             --ignore=tests/test_dataset_generation.py \
             --html=reports/eval_report.html \
             --self-contained-html
+
+      - name: Generate coverage badge
+        if: github.ref == 'refs/heads/main'
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: |
+          pytest --cov=src/llmeval --cov-report=xml -q --ignore=tests/test_dataset_generation.py || true
+          coverage-badge -o coverage.svg -f
+
+      - name: Commit coverage badge
+        if: github.ref == 'refs/heads/main'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add coverage.svg
+          git diff --cached --quiet || git commit -m "chore: update coverage badge [skip ci]"
+          git push
 
       - name: Upload report artifact
         uses: actions/upload-artifact@v4
