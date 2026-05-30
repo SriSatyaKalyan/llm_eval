@@ -14,10 +14,11 @@ lint:
 	mypy src/llmeval/
 
 coverage:
+	mkdir -p reports
 	pytest --cov=src/llmeval --cov-report=xml
 	coverage-badge -o coverage.svg -f
 
 clean:
 	find . -type d -name "__pycache__" -exec rm -rf {} +
 	find . -name "*.pyc" -delete
-	rm -f coverage.xml .coverage
+	rm -rf reports/

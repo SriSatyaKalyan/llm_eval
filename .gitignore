@@ -20,5 +20,4 @@ __pycache__/
 
 # Pytest & coverage artifacts
 .pytest_cache/
-.coverage
-coverage.xml
+reports/
