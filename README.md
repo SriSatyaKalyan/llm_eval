@@ -9,7 +9,7 @@ A Python-based testing framework for evaluating Large Language Model (LLM) respo
 The latest evaluation report is committed at [`data/eval_report.html`](data/eval_report.html).
 
 > **View it rendered in the browser** →
-> [htmlpreview.github.io — eval_report.html](https://htmlpreview.github.io/?https://github.com/patyesh123/LLMEval/blob/main/data/eval_report.html)
+> [htmlpreview.github.io — eval_report.html](https://htmlpreview.github.io/?https://github.com/SriSatyaKalyan/llm_eval/blob/main/data/eval_report.html)
 >
 > Or open it locally after cloning:
 > ```bash
